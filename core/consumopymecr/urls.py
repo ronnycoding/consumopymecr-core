@@ -24,6 +24,7 @@ from django.urls import path
 #     TokenVerifyView,
 # )
 from graphene_django.views import GraphQLView
+from graphql_jwt.decorators import jwt_cookie
 
 # Routers provide an easy way of automatically determining the URL conf.
 # router = routers.DefaultRouter()
@@ -36,5 +37,5 @@ urlpatterns = [
     # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('admin/', admin.site.urls),
-    path('graphql/', GraphQLView.as_view(graphiql=True)),
+    path('graphql/', jwt_cookie(GraphQLView.as_view(graphiql=True))),
 ]
